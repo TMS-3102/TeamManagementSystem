@@ -1,1 +1,27 @@
-<%# This will be the message board page %>
+<h1> This will be the team page that holds the message board. </h1>
+<p>
+    Access the current team by @team <br/>
+    Access the current team by @messages
+</p>
+
+
+<p> 
+    Message Board Id: <%= @message_board.id %> <br/> 
+    Message Board Number Stored: <%= @message_board.number_stored %>
+</p>
+
+<% if @message_board.messages.length == 0 %>
+    This message board has no messages yet. Create a new one <%= link_to "here", root_path %>. (this link will be the new message form)
+<% end %>
+
+<% @message_board.messages.each_with_index do |message, index| %>
+    <p>
+        Index: <%= index %> <br/>
+        Title: <%= title %> <br/>
+        Post Date: <%= post_date %> <br/>
+        Priority: <%= priority %> <br/>
+        Content: <%= content %> <br/>
+        Message Board Id: <%= message_board_id %> <br/>
+        Name: <%= name %>
+    </p>
+<% end %>

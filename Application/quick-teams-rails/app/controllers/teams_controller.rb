@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
 
     def message_board
         @team = Team.find params[:id]
+        @message_board = team.message_board
     end
 
 end
