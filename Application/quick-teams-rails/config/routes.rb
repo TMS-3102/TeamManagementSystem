@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resource :teams 
-  get 'users/:id' => 'users#show'
+  get 'accounts/:id' => 'accounts#show'
   get '/courses/:id' => 'courses#show'
   get '/teams/:id/message_board' => 'teams#message_board'
 
