@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20191120204348) do
     t.boolean  "status"
     t.integer  "course_id"
   end
-
+  
   create_table "teams_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
