@@ -1,0 +1,142 @@
+
+.img-size{
+    width: 50px;
+    height: 71px;
+}
+
+.img-size-checkout{
+    margin-right: 22px;
+    margin-left: 20.45px;
+}
+
+.border-top{
+    border-top: 1px solid #e3e3e3;
+}
+
+.related-title{
+    margin-left: 50px;
+    margin-bottom: 0px;
+}
+
+/**************************************************************************************/
+/*- Product Viewer -*/
+/************************************************************************************/
+
+
+/* navigation */
+
+#prod_wrapper {
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    margin-bottom: 30px;
+    padding: 10px 0 0
+}
+
+.prod_nav {
+    height: 156px;
+    width: 870px;
+    margin: auto;
+}
+
+.prod_nav ul {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.prod_nav li {
+    float: left;
+    padding-left: 1px;
+    width: 172px;
+    height: 110px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.prod_nav a {
+    color: #333333;
+    display: block;
+    padding: 17px;
+    position: relative;
+    word-spacing: -2px;
+    font-size: 11px;
+    height: 122px;
+    text-decoration: none;
+}
+
+.prod_nav a.current {
+    background: #f6f6f6;
+    float: none;
+    margin: 0;
+    border-bottom: 3px solid #F15A23
+}
+
+.prod_nav img {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 3px 0 5px 27px;
+    padding: 4px;
+    display: block;
+    height: 99%;
+}
+
+.prod_nav strong {
+    display: block;
+}
+
+/*.panes */
+.panes {
+    background: #fff;
+    width: 870px;
+    margin: auto;
+    height: 246px;
+    margin-bottom: -20px;
+    padding-bottom: 20px;
+
+    /* must be relative so the individual.panes can be absolutely positioned */
+    position: relative;
+}
+
+.panes div {
+    display: none;
+    top: 20px;
+    left: 20px;
+    font-size: 14px;
+    color: #444;
+    width: 835px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+.panes img {
+    float: left;
+    margin-right: 20px;
+    width: 200px;
+    height: 343px;
+    padding-bottom: 10px;
+}
+
+.panes p.more {
+    color: #000;
+    font-weight: bold;
+}
+
+.panes h2 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    font-weight: normal;
+    /*display: inline-block*/
+}
+
+.panes h5 {
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    font-weight: normal;
+    display: inline-block
+}
+
+.panes h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: normal;
+    /*display: inline-block*/
+}

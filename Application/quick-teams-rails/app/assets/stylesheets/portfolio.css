@@ -1,0 +1,125 @@
+/*-------------------------------------------------------------------------------------------------*/
+/*09 - PORTFOLIO*/
+/*-------------------------------------------------------------------------------------------------*/
+.portfolio-item-preview {
+    display: block;
+    /*background:url(../images/bg-fade.png) no-repeat center center;*/
+
+}
+
+.bordered-img {
+    border: 5px solid #f8f8f8;
+}
+
+.pretty-box {
+    background-color: #f8f8f8;
+    /*background:-moz-linear-gradient(center bottom , #f8f8f8 0px, #FFF 100%) repeat scroll 0 0 transparent;*/
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f8f8f8), color-stop(1, #FFF));
+    border: 1px solid #ebebeb !important;
+    padding: 4px;
+}
+
+.pretty-box:hover {
+    border: 1px solid #556074 !important;
+    -moz-box-shadow: 0 0px 3px #e7e7e7;
+    box-shadow: 0 0px 3px #e7e7e7;
+    -webkit-box-shadow: 0 0px 3px #e7e7e7;
+    -o-box-shadow: 0 1px 3px #e7e7e7;
+}
+
+/*has to be an id since it is used in the plugins js*/
+#portfolio {
+    width: 960px;
+    margin: auto;
+}
+
+#portfolio p {
+    padding: 0;
+    margin-bottom: 5px
+}
+
+.portfolio-container ul li a.hide {
+    display: none;
+}
+
+.portfolio-container {
+    padding: 0px;
+    display: block;
+    width: 990px;
+    float: left;
+    height: auto;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: -30px;
+}
+
+.portfolio-container ul {
+    list-style-type: none;
+    margin: 0px;
+    padding-left: 0px;
+    padding-top: 10px;
+}
+
+.portfolio-container ul li {
+    list-style-type: none
+}
+
+/***************************************************
+		  FILTERABLE   PORTFOLIO
+***************************************************/
+#filterable {
+    display: inline;
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+
+}
+
+#filterable li {
+    float: left;
+    margin-left: 25px;
+
+}
+
+#filterable li a {
+    display: block;
+
+}
+
+.filterable_current a {
+    color: #8e1a00;
+
+}
+
+#filterable li h5 {
+    float: left;
+    margin-top: 0px;
+
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+/*PORTFOLIO DETAILS NAVIGATION*/
+/*-------------------------------------------------------------------------------------------------*/
+.portfolio-details-nav {
+    float: right;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#prev, #next {
+    display: block;
+    float: right;
+    padding: 4px 9px;
+    margin-right: 5px;
+    border: 1px solid #d7d7d7;
+    background-color: #ffffff;
+}
+
+#prev:hover, #next:hover {
+    background-color: #F7F7F7;
+}
+
+#prev a:hover, #next a:hover {
+    text-decoration: none !important;
+}

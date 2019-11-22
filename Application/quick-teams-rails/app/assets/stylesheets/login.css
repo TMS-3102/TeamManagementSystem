@@ -1,0 +1,39 @@
+.container {
+    padding: 15% 15% 15% 15%;
+
+}
+
+.row {
+    padding-top: 5%;
+}
+
+#login li {
+    list-style: none;
+    padding: 2.5% 5% 2.5% 0%;
+}
+
+#left {
+
+    border-right: 3px solid #FF250D;
+}
+
+#signup li {
+    list-style: none;
+    padding: 1.25%;
+}
+
+footer {
+    background-color: #14A697;
+    opacity: 0.7;
+    margin-top: 5%;
+    padding: 1.5%;
+    color: #E5E5E5;
+}
+
+#signup li {
+    padding: 2.5% 5% 2.5% 0%;
+}
+
+#hotel {
+    display: none;
+}

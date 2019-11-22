@@ -1,0 +1,37 @@
+/**************************************************************************************/
+/*- Checkout Payment Form -*/
+/************************************************************************************/
+
+
+.checkout-req{
+    color: red;
+    visibility: hidden;
+}
+
+.subtotal-title{
+    float: right;
+    font-size: 20px;
+}
+
+.tax-row{
+    float: right;
+    margin-top: -10px;
+    margin-right: 10px;
+}
+
+.checkout-tax-num{
+    float: left;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.ship-tot-checkout {
+    float: right;
+    margin-top: -20px;
+    margin-right: 10px;
+}
+
+.form-control {
+    width: 80%;
+    height: 75%;
+}

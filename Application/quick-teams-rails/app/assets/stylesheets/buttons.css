@@ -1,0 +1,79 @@
+/*-------------------------------------------------------------------------------------------------*/
+/*Buttons*/
+/*-------------------------------------------------------------------------------------------------*/
+
+
+.btn-dark:hover {
+    -webkit-box-shadow: 0 0 6px #000000;
+    -moz-box-shadow: 0 0 6px #000000;
+    box-shadow: 0 0 6px #000000;
+    cursor: pointer;
+}
+
+.btn-ship {
+    display: inline-block;
+    font-weight: 200;
+    width: 50px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 7px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-bottom: 5px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-dark-ship {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-dark-ship:hover {
+    -webkit-box-shadow: 0 0 6px #000000;
+    -moz-box-shadow: 0 0 6px #000000;
+    box-shadow: 0 0 6px #000000;
+    cursor: pointer;
+}
+
+.add-cart-btn{
+    margin-top: 10px;
+}
+
+.removeProd{
+    font-size: 25px;
+    color: #cc1413;
+}
+
+.removeProd:hover {
+    cursor: pointer;
+}
+
+.quantity-button{
+    line-height: normal;
+}
+
+#checkoutBut {
+    margin-top: 10px;
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 50px;
+    font-size: 15px;
+}
+
+.checkout-submit{
+    margin-top: 10px;
+    float: right;
+    margin-right: 52px;
+}
+
+.hidden-submit{
+    display: none !important;
+}
