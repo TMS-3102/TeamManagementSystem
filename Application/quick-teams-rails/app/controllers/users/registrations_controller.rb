@@ -15,8 +15,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     inputted_user_info = params[:user]
 
+    binding.pry
+
     @user.name = inputted_user_info[:name]
-    @user.is_student = (inputted_user_info[:is_student] == "true")
+    @user.is_student = (inputted_user_info[:is_student] == 1)
     @user.identification_number = inputted_user_info[:identification_number].to_i
     
     @user.save
