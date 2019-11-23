@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Lobster+Two'>
+
+<div class="header-float-right">
+    <% if user_signed_in? %>
+        <%= link_to "#{current_user.name}", "/accounts/#{current_user.id}", :class=>"gray-name" %><br/>
+        <%= link_to "Sign Out", destroy_user_session_path, data: {method: :delete} %>
+    <% else %>
+        <%= link_to "Sign In", new_user_session_path, :class=>"" %>
+    <% end %>
+</div>
+
+<div class="header">
+    <div class="site_title">
+        <a href="/">
+            Quick-Teams
+        </a>
+    </div>
+</div>
