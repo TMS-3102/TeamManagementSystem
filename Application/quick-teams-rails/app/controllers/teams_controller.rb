@@ -24,11 +24,32 @@ class TeamsController < ApplicationController
         if @message.save
             flash[:success] = "New message created."
         else
-            flash[:error] = "Error: Message creation failed."
+            flash[:danger] = "Error: Message creation failed."
         end
         redirect_to "/teams/#{params[:id]}/message_board"
     end
 
+    def student_requests
+        team = Team.find params[:id]
+        @requests = team.requests
+    end
+
+    def approve_or_reject_join_team
+        student = User.find(params[:student_id])
+        request = Request.find(params[:request_id])
+
+        if params[:status] == "true"
+            team = Team.find(params[:id])
+            team.users << student
+            team.save
+            flash[:success] = "Request successfully approved."
+        else
+            flash[:danger] = "Request successfully rejected."
+        end
+        request.destroy
+        redirect_to "/teams/#{params[:id]}/student_requests"
+    end
+    
     def new
         @team = Team.new
 
@@ -55,7 +76,7 @@ class TeamsController < ApplicationController
             redirect_to "/accounts/#{current_user.id}"
         else
             render 'new'
-            flash[:error] = "Error: Team creation failed."
+            flash[:danger] = "Error: Team creation failed."
         end    
     end
 

@@ -1,0 +1,19 @@
+
+<h1>Requests</h1>
+
+<% if @requests.length == 0 %>
+    No requests available.
+<% end %>
+
+<% @requests.each_with_index do |request, index| %>
+    <% student = User.find(request.student_id) %>
+    <p>
+        Index: <%= index %> <br/>
+        Name: <%= student.name %> <br/>
+        Email: <%= student.email %> <br/>
+        Student Id: <%= student.identification_number %> <br/>
+        Request Id: <%= request.id %>
+        <%= button_to 'Approve Request', approve_or_reject_join_team_path(params[:id], student_id: student.id, status: true, request_id: request.id)%>
+        <%= button_to 'Reject Request', approve_or_reject_join_team_path(params[:id], student_id: student.id, status: false, request_id: request.id)%>
+    </p>
+<% end %>

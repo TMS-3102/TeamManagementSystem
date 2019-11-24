@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
             redirect_to "/accounts/#{current_user.id}"
         else
             render 'new'
-            flash[:error] = "Error: Course creation failed."
+            flash[:danger] = "Error: Course creation failed."
         end
     end
 
@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
         team = Team.find(params[:team_id])
         request = team.requests.find_by(student_id: current_user)
         if request.present?
-            flash[:error] = "There is already an active request for this user."
+            flash[:danger] = "There is already an active request for this user."
             redirect_to "/courses/#{params[:id]}" and return
         end
 
@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
         if request.save
             flash[:success] = "New request created."
         else
-            flash[:error] = "Error: Request creation failed."
+            flash[:danger] = "Error: Request creation failed."
         end
         redirect_to "/courses/#{params[:id]}"
     end
