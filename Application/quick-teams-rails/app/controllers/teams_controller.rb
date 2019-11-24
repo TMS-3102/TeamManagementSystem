@@ -46,9 +46,15 @@ class TeamsController < ApplicationController
 
         if params[:status] == "true"
             team = Team.find(params[:id])
-            team.users << student
-            team.save
-            flash[:success] = "Request successfully approved."
+            if team.users.length >= team.maximum_capacity
+                flash[:warning] = "Team already full."
+                redirect_to "/teams/#{params[:id]}/student_requests" and return
+            else
+                team.users << student
+                team.status = true if team.users.length == team.maximum_capacity
+                team.save
+                flash[:success] = "Request successfully approved."
+            end
         else
             flash[:danger] = "Request successfully rejected."
         end

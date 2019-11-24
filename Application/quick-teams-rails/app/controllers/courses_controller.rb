@@ -55,7 +55,7 @@ class CoursesController < ApplicationController
         team = Team.find(params[:team_id])
         request = team.requests.find_by(student_id: current_user)
         if request.present?
-            flash[:danger] = "There is already an active request for this user."
+            flash[:danger] = "There is already an active request for this user to this team."
             redirect_to "/courses/#{params[:id]}" and return
         end
 
