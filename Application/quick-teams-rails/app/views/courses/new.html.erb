@@ -1,0 +1,20 @@
+<% if @course.errors.full_messages.present? %>
+	<ul>
+		<% @course.errors.full_messages.each do |error| %>
+			<li>
+				<%= error %>
+			</li>
+		<% end %>
+	</ul>
+<% end %> 
+
+<%= form_for(@course) do |f| %>
+
+	<%= f.label(:name) %><br>
+	<%= f.text_field(:name) %> <br>
+	<%= f.label(:code) %> <br>
+	<%= f.text_field(:code) %> <br>
+	
+	<%= f.submit %>
+
+<% end %>

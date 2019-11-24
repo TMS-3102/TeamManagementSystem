@@ -5,3 +5,11 @@
 <p>
     Access all teams with @course.teams
 </p>
+
+test
+<% @course.teams.each do |team| %>
+    <p>
+        <%= team.name %>
+        <%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id)%>
+    </p>
+<% end %>
