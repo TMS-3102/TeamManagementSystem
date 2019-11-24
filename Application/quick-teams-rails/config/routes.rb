@@ -7,12 +7,16 @@ Rails.application.routes.draw do
    
   get 'accounts/:id' => 'accounts#show'
   
+  
+  get '/courses' => 'courses#index'
+  patch '/courses/:id/add_students' => 'courses#add_students', :as => :add_student
+  get '/courses' => 'courses#index'
   get '/courses/new' => 'courses#new'
   get '/courses/:id' => 'courses#show'
   post "/courses" => "courses#create"
   post "/courses/:id/request_join_team" => "courses#request_join_team", :as => :request_join_team
 
-  get '/teams' => 'teams#index'
+  # get '/teams' => 'teams#index'
 	get "/teams/new" => "teams#new"
 	# get "/teams/:id/edit" => "teams#edit"
 	# patch "/teams/:id" => "teams#update"

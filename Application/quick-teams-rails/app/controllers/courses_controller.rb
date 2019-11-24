@@ -1,8 +1,31 @@
 class CoursesController < ApplicationController
 
+    def index
+        if current_user.is_student?
+            flash[:warning] = "Your user account type is not authorized to view all courses."
+            redirect_to "/accounts/#{current_user.id}" and return
+        end
+
+        # @courses = Course.where(instructor_id: current_user.id)
+        @courses = Course.all
+    end
+
+    def add_students
+        user = User.find(params[:student_id])
+        course = Course.find(params[:id])
+
+
+        if course.users.where(id: user.id).empty?
+            course.users << user
+            flash[:success] = "#{user.name} has been registered to #{course.code}"
+        else
+            flash[:danger] = "This student is already registered to #{course.code}"
+        end    
+        redirect_to '/courses'
+    end
+
     def show 
         @course = Course.find params[:id]
-
         @request = Request.new
     end
 
@@ -17,6 +40,7 @@ class CoursesController < ApplicationController
 
     def create
         @course = Course.new(course_params)
+        @course.instructor_id = current_user.id
 
         if @course.save
             flash[:success] = "New course created."
