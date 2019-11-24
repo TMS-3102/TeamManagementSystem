@@ -1,0 +1,30 @@
+<% if @team.errors.full_messages.present? %>
+	<ul>
+		<% @team.errors.full_messages.each do |error| %>
+			<li>
+				<%= error %>
+			</li>
+		<% end %>
+	</ul>
+<% end %> 
+
+<%= form_for(@team) do |f| %>
+
+	<%= f.label(:name) %><br>
+	<%= f.text_field(:name) %> <br>
+	<%= f.label(:liaison_id) %> <br>
+	<%= f.collection_select(:liaison_id, User.all, :id, :name, :prompt => true) %> <br>
+	<%= f.label(:maximum_capacity) %> <br>
+	<%= f.text_field(:maximum_capacity) %> <br>
+	<%= f.label(:minimum_capacity) %> <br>
+	<%= f.text_field(:minimum_capacity) %> <br>
+	<%= f.label(:deadline) %> <br>
+    <%= f.date_field :deadline, as: :date, value: f.object.try(:strftime,"%m/%d/%Y") %><br>
+    <%= f.label(:course_id) %> <br>
+	<%= f.collection_select(:course_id, Course.all, :id, :name, :prompt => true) %> <br>
+
+    <%= f.label(:number_stored) %> <br>
+	<%= text_field_tag(:number_stored) %> <br>
+	<%= f.submit %>
+
+<% end %>

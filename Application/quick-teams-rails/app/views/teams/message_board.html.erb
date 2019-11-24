@@ -14,14 +14,38 @@
     This message board has no messages yet. Create a new one <%= link_to "here", root_path %>. (this link will be the new message form)
 <% end %>
 
-<% @message_board.messages.each_with_index do |message, index| %>
+<% @message_board.messages.last(5).each_with_index do |message, index| %>
     <p>
         Index: <%= index %> <br/>
-        Title: <%= title %> <br/>
-        Post Date: <%= post_date %> <br/>
-        Priority: <%= priority %> <br/>
-        Content: <%= content %> <br/>
-        Message Board Id: <%= message_board_id %> <br/>
-        Name: <%= name %>
+        Title: <%= message.title %> <br/>
+        Post Date: <%= message.post_date %> <br/>
+        Priority: <%= message.priority %> <br/>
+        Content: <%= message.content %> <br/>
+        Message Board Id: <%= message.message_board_id %> <br/>
+        Name: <%= message.name %>
     </p>
+<% end %>
+
+<% if @team.errors.full_messages.present? %>
+	<ul>
+		<% @team.errors.full_messages.each do |error| %>
+			<li>
+				<%= error %>
+			</li>
+		<% end %>
+	</ul>
+<% end %> 
+
+<h3>Create New Message</h3>
+<%= form_for @message, :url => create_message_path(params[:id]) do |f| %>
+
+	<%= f.label(:title) %><br>
+	<%= f.text_field(:title) %> <br>
+	<%= f.label(:content) %><br>
+	<%= f.text_area(:content) %> <br>
+	<%= f.label(:priority) %><br>
+    <%= f.select :priority, options_for_select([["Priority", ""], 1,2,3,4,5]) %><br>
+    <br/>
+	<%= f.submit %>
+
 <% end %>
