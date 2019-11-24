@@ -1,8 +1,31 @@
 class CoursesController < ApplicationController
 
+    def index
+        if current_user.is_student?
+            flash[:warning] = "Your user account type is not authorized to view all courses."
+            redirect_to "/accounts/#{current_user.id}" and return
+        end
+
+        # @courses = Course.where(instructor_id: current_user.id)
+        @courses = Course.all
+    end
+
+    def add_students
+        user = User.find(params[:student_id])
+        course = Course.find(params[:id])
+
+
+        if course.users.where(id: user.id).empty?
+            course.users << user
+            flash[:success] = "#{user.name} has been registered to #{course.code}"
+        else
+            flash[:danger] = "This student is already registered to #{course.code}"
+        end    
+        redirect_to '/courses'
+    end
+
     def show 
         @course = Course.find params[:id]
-
         @request = Request.new
     end
 
@@ -17,13 +40,14 @@ class CoursesController < ApplicationController
 
     def create
         @course = Course.new(course_params)
+        @course.instructor_id = current_user.id
 
         if @course.save
             flash[:success] = "New course created."
             redirect_to "/accounts/#{current_user.id}"
         else
             render 'new'
-            flash[:error] = "Error: Course creation failed."
+            flash[:danger] = "Error: Course creation failed."
         end
     end
 
@@ -31,7 +55,7 @@ class CoursesController < ApplicationController
         team = Team.find(params[:team_id])
         request = team.requests.find_by(student_id: current_user)
         if request.present?
-            flash[:error] = "There is already an active request for this user."
+            flash[:danger] = "There is already an active request for this user to this team."
             redirect_to "/courses/#{params[:id]}" and return
         end
 
@@ -41,7 +65,7 @@ class CoursesController < ApplicationController
         if request.save
             flash[:success] = "New request created."
         else
-            flash[:error] = "Error: Request creation failed."
+            flash[:danger] = "Error: Request creation failed."
         end
         redirect_to "/courses/#{params[:id]}"
     end

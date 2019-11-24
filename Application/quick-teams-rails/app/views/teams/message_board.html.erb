@@ -11,10 +11,10 @@
 </p>
 
 <% if @message_board.messages.length == 0 %>
-    This message board has no messages yet. Create a new one <%= link_to "here", root_path %>. (this link will be the new message form)
+    This message board has no messages yet. Create a new one below.
 <% end %>
 
-<% @message_board.messages.last(5).each_with_index do |message, index| %>
+<% @message_board.messages.last(@message_board.number_stored).each_with_index do |message, index| %>
     <p>
         Index: <%= index %> <br/>
         Title: <%= message.title %> <br/>

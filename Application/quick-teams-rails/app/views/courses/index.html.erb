@@ -1,0 +1,16 @@
+<h1>
+    All Courses
+</h1>
+
+<% @courses.each do |course| %>
+    <p>
+        Name: <%= course.name %><br/>
+        Code: <%= course.code %><br/>
+
+        <%= form_for course, :url => add_student_path(course.id) do |f| %>
+            <%= f.label(:add_student) %>
+	        <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: true), 'id', 'name') %><br>
+            <%= f.submit %>
+        <% end %>
+    </p>
+<% end %>

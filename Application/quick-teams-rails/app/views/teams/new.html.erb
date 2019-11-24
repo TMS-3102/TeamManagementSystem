@@ -23,7 +23,7 @@
     <%= f.label(:course_id) %> <br>
 	<%= f.collection_select(:course_id, Course.all, :id, :name, :prompt => true) %> <br>
 
-    <%= f.label(:number_stored) %> <br>
+    <%= f.label :number_stored, "Number of Messages Stored" %> <br>
 	<%= text_field_tag(:number_stored) %> <br>
 	<%= f.submit %>
 
