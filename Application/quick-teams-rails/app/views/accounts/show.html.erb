@@ -1,20 +1,32 @@
-<h2><%= @user.name %></h2>
-<% @user.courses.each.with_index do |course, index| %>
-    <%= link_to "/courses/#{course.id}", :action => 'go' do %>
-        <div class="course">
-            <p>
-                Course: <%= course.code %> <br/>
-                Name: <%= course.name %> <br/>
-            </p>
-        </div>
-    <% end %>
-    
-<% end %>
+<h1 style="text-align: center; padding-top: 5%"><%= @user.name %></h1>
 
-<% if @user.is_student == false %>
-    <%= link_to "/courses/new", :action => 'go' do %>
-        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Create Course</button>
-    <% end %>
+<div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <% @user.courses.each.with_index do |course, index| %>
+                <%= link_to "/courses/#{course.id}", :action => 'go' do %>
+                    <div class="course">
+                        <p>
+                            Course: <%= course.code %> <br/>
+                            Name: <%= course.name %> <br/>
+                        </p>
+                    </div>
+                <% end %>
+                <% end %>
+                <% if @user.is_student == false %>
+                    <%= link_to "/courses/new", :action => 'go' do %>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Create Course</button>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm"></div>
+</div>
     
-    <% end %>
+
+
+
 
