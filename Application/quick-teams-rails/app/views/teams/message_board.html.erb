@@ -1,30 +1,47 @@
-<h1> This will be the team page that holds the message board. </h1>
-<p>
-    Access the current team by @team <br/>
-    Access the current team by @messages
-</p>
-
-
-<p> 
-    Message Board Id: <%= @message_board.id %> <br/> 
-    Message Board Number Stored: <%= @message_board.number_stored %>
-</p>
+<h1 style="text-align: center"><%=@team.name%> Message Board</h1>
 
 <% if @message_board.messages.length == 0 %>
     This message board has no messages yet. Create a new one below.
 <% end %>
 
-<% @message_board.messages.last(@message_board.number_stored).each_with_index do |message, index| %>
-    <p>
-        Index: <%= index %> <br/>
-        Title: <%= message.title %> <br/>
-        Post Date: <%= message.post_date %> <br/>
-        Priority: <%= message.priority %> <br/>
-        Content: <%= message.content %> <br/>
-        Message Board Id: <%= message.message_board_id %> <br/>
-        Name: <%= message.name %>
-    </p>
-<% end %>
+<div class="row">
+    <div id="left" class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <h3>Create New Message</h3>
+                <%= form_for @message, :url => create_message_path(params[:id]) do |f| %>
+                    <%= f.select :priority, options_for_select([["Priority", ""], 1,2,3,4,5], class:"form-control") %><br>
+                    <br/>
+                    <%= f.text_field(:title, placeholder:"Title", class:"form-control") %> <br>
+                    
+                    <%= f.text_area(:content, placeholder:"Content", class:"form-control") %> <br>
+                    
+                    <%= f.submit "Create Message", class: "btn btn-danger"  %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div id="right" class="col-sm-6">
+        <% @message_board.messages.last(@message_board.number_stored).each_with_index do |message, index| %>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3><%= message.title %></h3>
+                        <h5>
+                            Priority: <%= message.priority %>
+                        </h5>    
+                        <p>
+                            <%= message.content %> <br/><br/>
+                            Post Date: <%= message.post_date %> <br/>
+                            Created By: <%= message.name %>
+                        </p>
+                </div>
+            </div>
+                
+        <% end %>
+    </div>
+    <div class="col-sm"></div>
+</div>
 
 <% if @team.errors.full_messages.present? %>
 	<ul>
@@ -35,17 +52,3 @@
 		<% end %>
 	</ul>
 <% end %> 
-
-<h3>Create New Message</h3>
-<%= form_for @message, :url => create_message_path(params[:id]) do |f| %>
-
-	<%= f.label(:title) %><br>
-	<%= f.text_field(:title) %> <br>
-	<%= f.label(:content) %><br>
-	<%= f.text_area(:content) %> <br>
-	<%= f.label(:priority) %><br>
-    <%= f.select :priority, options_for_select([["Priority", ""], 1,2,3,4,5]) %><br>
-    <br/>
-	<%= f.submit %>
-
-<% end %>
