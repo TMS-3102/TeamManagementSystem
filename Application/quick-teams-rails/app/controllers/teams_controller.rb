@@ -31,10 +31,10 @@ class TeamsController < ApplicationController
     end
 
     def student_requests
-        team = Team.find params[:id]
-        @requests = team.requests
+        @team = Team.find params[:id]
+        @requests = @team.requests
 
-        if(current_user.id != team.liaison_id && current_user.is_student)
+        if(current_user.id != @team.liaison_id && current_user.is_student)
             flash[:danger] = "Your account is not authorized to visit that page."
             redirect_to "/accounts/#{current_user.id}"
         end
