@@ -57,7 +57,9 @@
         </td>
         <td class='center'>
           Number of requests: <%= team.requests.length%><br>
-          <% if @student_on_team %>
+          <% if !current_user.is_student %>
+            
+          <% elsif @student_on_team %>
             Already on a team.
           <% elsif !team.requests.where(student_id: current_user.id).empty? %>
             Request Active
