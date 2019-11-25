@@ -1,12 +1,31 @@
 <h2><%= @user.name %></h2>
 <% @user.courses.each.with_index do |course, index| %>
-    <%= link_to "/courses/#{course.id}", :action => 'go' do %>
-        <div class="course">
-            <p>
-                Course: <%= course.code %> <br/>
-                Name: <%= course.name %> <br/>
-            </p>
-        </div>
+    <% on_team = false %>
+    <% team_id = 99999999 %>
+    <% course.teams.each do |team| %>
+        <% if !team.users.where(id: current_user.id).empty? %>
+            <% on_team = true %>
+            <% team_id = team.id %>
+        <% end %>
+    <% end %>
+    <% if on_team && current_user.is_student %>
+        <%= link_to "/teams/#{team_id}/message_board", :action => 'go' do %>
+            <div class="course">
+                <p>
+                    Course: <%= course.code %> <br/>
+                    Name: <%= course.name %> <br/>
+                </p>
+            </div>
+        <% end %>
+    <% else %>
+        <%= link_to "/courses/#{course.id}", :action => 'go' do %>
+            <div class="course">
+                <p>
+                    Course: <%= course.code %> <br/>
+                    Name: <%= course.name %> <br/>
+                </p>
+            </div>
+        <% end %>
     <% end %>
     
 <% end %>
