@@ -4,6 +4,7 @@
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    text-align: center;
   }
 
   #teams td, #teams th {
@@ -22,18 +23,26 @@
     background-color: #dc3545;
     color: white;
   }
+
+  .center {
+    text-align: center;
+  }
   </style>
 </head>
-<h1>
-    Active Teams:
+<h1 class="center">
+    <%= @course.name %>: Active Teams
 </h1>
 
 <table id = "teams">
   <th>Team Name</th>
   <th>Active Members</th>
-  <th>Team Capcity</th>
+  <th>Team Capacity</th>
   <th>Liaison</th>
   <th>Requests</th>
+  <th>Active Requests</th>
+  <% if !current_user.is_student %>
+    <th>Message Board</th>
+  <% end %>
   <% @course.teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
@@ -46,11 +55,28 @@
           <% end %>
         <% end %>
         </td>
-        <td>Number of requests: <%= team.requests.length%>
-        <br><%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id) %></td>
+        <td class='center'>
+          Number of requests: <%= team.requests.length%><br>
+          <% if @student_on_team %>
+            Already on a team.
+          <% elsif !team.requests.where(student_id: current_user.id).empty? %>
+            Request Active
+          <%else%>
+            <%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id), {class: "btn btn-outline-success"} %>
+          <% end %>
+        </td>
+        <td class='center'>
+          <% if current_user.id == team.liaison_id || !current_user.is_student%>
+            <%= link_to "Requests", "/teams/#{team.id}/student_requests", class: "btn btn-secondary" %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
+        <% if !current_user.is_student %>
+          <td class='center'>
+              <%= link_to "Message Board", "/teams/#{team.id}/message_board", class: "btn btn-secondary" %>
+          </td>
+        <% end %>
       </tr>
-
-
-
   <% end %>
 </table>
