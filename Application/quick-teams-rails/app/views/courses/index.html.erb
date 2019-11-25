@@ -1,22 +1,27 @@
-<h1>
-    All Courses
-</h1>
+<div class = "center-div">
+    <h1>
+        All Courses
+    </h1>
+    <% @courses.each do |course| %>
+        <p>
+            <div class="course-full">
+                <p>
+                    Course: <%= course.code %> <br>
+                    Name: <%= course.name %>
+                </p>
+            </div>
 
-<% @courses.each do |course| %>
-    <p>
-        Name: <%= course.name %><br/>
-        Code: <%= course.code %><br/>
+            <%= form_for course, :url => add_student_path(course.id) do |f| %>
+                <%= f.label(:add_student) %>
+                <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: true), 'id', 'name') %><br>
+                <%= f.submit %>
+            <% end %>
 
-        <%= form_for course, :url => add_student_path(course.id) do |f| %>
-            <%= f.label(:add_student) %>
-	        <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: true), 'id', 'name') %><br>
-            <%= f.submit %>
-        <% end %>
-
-        <%= form_for course, :url => add_student_path(course.id) do |f| %>
-            <%= f.label(:add_instructor) %>
-	        <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: false), 'id', 'name') %><br>
-            <%= f.submit %>
-        <% end %>
-    </p>
-<% end %>
+            <%= form_for course, :url => add_student_path(course.id) do |f| %>
+                <%= f.label(:add_instructor) %>
+                <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: false), 'id', 'name') %><br>
+                <%= f.submit %>
+            <% end %>
+        </p>
+    <% end %>
+</div>
