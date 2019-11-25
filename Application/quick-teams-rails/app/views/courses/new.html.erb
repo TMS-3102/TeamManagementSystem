@@ -11,7 +11,7 @@
 <%= form_for(@course) do |f| %>
 
 
-	<h4 class="card-title" style="color: #FF250D;">Create Course</h4>
+	<h4 class="course-card-title" >Create Course</h4>
     <ul id="create-course"> 
 		<li class="input-title"><%= f.label(:name) %></li>
         <li class="input"><%= f.text_field :name, autocomplete: "course name", placeholder:"Course Name", autofocus: true, class: "form-control" %></li>
