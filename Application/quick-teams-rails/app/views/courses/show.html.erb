@@ -1,16 +1,56 @@
+<head>
+  <style>
+  #teams {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #teams td, #teams th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #teams tr:nth-child(even){background-color: #f2f2f2;}
+
+  #teams tr:hover {background-color: #ddd;}
+
+  #teams th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #dc3545;
+    color: white;
+  }
+  </style>
+</head>
 <h1>
-    Course page that will list teams. 
+    Active Teams:
 </h1>
 
-<p>
-    Access all teams with @course.teams
-</p>
+<table id = "teams">
+  <th>Team Name</th>
+  <th>Active Members</th>
+  <th>Team Capcity</th>
+  <th>Liaison</th>
+  <th>Requests</th>
+  <% @course.teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.users.count %></td>
+        <td><%= team.maximum_capacity %></td>
+        <td>
+        <% team.users.each do |liaison| %>
+          <% if liaison.is_liaison %>
+            <%= liaison.name %>
+          <% end %>
+        <% end %>
+        </td>
+        <td>Number of requests: <%= team.requests.length%>
+        <br><%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id) %></td>
+      </tr>
 
-test
-<% @course.teams.each do |team| %>
-    <p>
-        <%= team.name %>
-        Number of requests: <%= team.requests.length%>
-        <%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id) %>
-    </p>
-<% end %>
+
+
+  <% end %>
+</table>
