@@ -1,3 +1,11 @@
+
+<style>
+	#select {
+		width: 40%;
+	}
+</style>
+
+<div class='div-center'>
 <% if @team.errors.full_messages.present? %>
 	<ul>
 		<% @team.errors.full_messages.each do |error| %>
@@ -6,25 +14,27 @@
 			</li>
 		<% end %>
 	</ul>
-<% end %> 
+<% end %>
 
 <%= form_for(@team) do |f| %>
+<h3 class="course-card-title" >Create Team</h3>
+<ul id="create-course">
+	<li class="input-title"><%= f.label(:name) %></li>
+	  <li class="input"><%= f.text_field :name, autocomplete: "Team name", placeholder:"Team Name", autofocus: true, class: "form-control" %></li>
+	<li class="input-title"><%= f.label(:liaison_id) %></li>
+		<li id="select"><%= f.collection_select(:liaison_id, User.all, :id, :name, {:prompt => true},{ class:"form-control"}) %> </li>
+	<li class="input-title"><%= f.label(:maximum_capacity) %> </li>
+		<li class="input"><%= f.number_field :maximum_capacity, placeholder:"Max Team Capacity", class: "form-control" %></li>
+	<li class="input-title"><%= f.label(:minimum_capacity) %></li>
+		<li class="input"><%= f.number_field :minimum_capacity, placeholder:"Min Team Capacity", class: "form-control" %></li>
+	<li class="input-title"><%= f.label(:deadline) %></li>
+    <li class="input"> <%= f.date_field :deadline, as: :date, value: f.object.try(:strftime,"%m/%d/%Y"), class:'form-control' %></li>
+  <li class="input-title"><%= f.label(:course_id) %> </li>
+			<li id="select"><%= f.collection_select(:course_id, Course.all, :id, :name, {:prompt => true},{ class:"form-control"}) %></li>
 
-	<%= f.label(:name) %><br>
-	<%= f.text_field(:name) %> <br>
-	<%= f.label(:liaison_id) %> <br>
-	<%= f.collection_select(:liaison_id, User.all, :id, :name, :prompt => true) %> <br>
-	<%= f.label(:maximum_capacity) %> <br>
-	<%= f.text_field(:maximum_capacity) %> <br>
-	<%= f.label(:minimum_capacity) %> <br>
-	<%= f.text_field(:minimum_capacity) %> <br>
-	<%= f.label(:deadline) %> <br>
-    <%= f.date_field :deadline, as: :date, value: f.object.try(:strftime,"%m/%d/%Y") %><br>
-    <%= f.label(:course_id) %> <br>
-	<%= f.collection_select(:course_id, Course.all, :id, :name, :prompt => true) %> <br>
-
-    <%= f.label :number_stored, "Number of Messages Stored" %> <br>
-	<%= text_field_tag(:number_stored) %> <br>
-	<%= f.submit %>
+  <li class="input-title"> <%= f.label :number_stored, "Number of Messages Stored" %> </li>
+		<li class="input"><%= text_field_tag(:number_stored, nil, class: "form-control",placeholder: "Number of Messages Stored on Message Board") %> </li>
+	<li class="submit-btn"><%= f.submit class: "btn btn-danger"%></li>
 
 <% end %>
+</div>
