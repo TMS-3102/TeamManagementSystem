@@ -12,15 +12,9 @@
 <% end %>
 
 <% if @user.is_student == false %>
-    <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Create Course</button>
-    <div>    
-        <%= form_tag({:action => 'course'}) do %>
-        <%= label_tag(:q, "Course Code:") %>
-        <%= text_field_tag(:q) %>
-        <%= label_tag(:r, "Course Name:") %>
-        <%= text_field_tag(:r) %>
-        <%= submit_tag("Submit") %>
-        <% end %>
-    </div>
-<% end %>
+    <%= link_to "/courses/new", :action => 'go' do %>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Create Course</button>
+    <% end %>
+    
+    <% end %>
 

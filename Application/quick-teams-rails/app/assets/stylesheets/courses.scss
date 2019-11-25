@@ -1,3 +1,18 @@
-// Place all the styles related to the Courses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.input {
+    width: 40%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+.input-title {
+    width: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.submit-btn {
+    padding-top: 10px;
+}

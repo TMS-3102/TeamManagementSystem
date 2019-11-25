@@ -10,11 +10,15 @@
 
 <%= form_for(@course) do |f| %>
 
-	<%= f.label(:name) %><br>
-	<%= f.text_field(:name) %> <br>
-	<%= f.label(:code) %> <br>
-	<%= f.text_field(:code) %> <br>
-	
-	<%= f.submit %>
+
+	<h4 class="card-title" style="color: #FF250D;">Create Course</h4>
+    <ul id="create-course"> 
+		<li class="input-title"><%= f.label(:name) %></li>
+        <li class="input"><%= f.text_field :name, autocomplete: "course name", placeholder:"Course Name", autofocus: true, class: "form-control" %></li>
+        <li class="input-title"><%= f.label(:code) %></li>
+		<li class="input"><%= f.text_field :code, autocomplete: "course code", placeholder:"Course Code", autofocus: true, class: "form-control" %></li>
+        <li class="submit-btn"><%= f.submit "Sign up", class: "btn btn-danger" %></li>   
+
+    </ul>
 
 <% end %>
