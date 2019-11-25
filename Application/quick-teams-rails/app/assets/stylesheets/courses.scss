@@ -5,6 +5,9 @@
     
 }
 
+.title-div {
+    margin-top: 20px;
+}
 .input-title {
     width: 50%;
     padding-top: 5px;
@@ -23,10 +26,21 @@
     padding-top: 5px;
 }
 .course-full {
+    font-size: 1.75rem;
     border-style: solid;
     border-width: 3px;
     border-color: #dc3545;
     border-radius: 5px;
     padding: 5px;
     margin-bottom: 10px;
+    background-color: #dc3545;
+    color: white;
+}
+
+.course-tile {
+    margin: 0px;
+}
+
+.course-update{
+    padding: 5px;
 }
