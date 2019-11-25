@@ -17,7 +17,8 @@ class TeamsController < ApplicationController
         @message.title = params[:message][:title]
         @message.content = params[:message][:content]
         @message.priority = params[:message][:priority]
-
+        @message.name = current_user.name
+        @message.post_date = DateTime.now
         team = Team.find(params[:id])
         team.message_board.messages << @message 
 
