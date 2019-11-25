@@ -1,22 +1,20 @@
-
-<%if @user.is_student %>
-    <h2>Student</h2>
-    <% @user.courses.each.with_index do |course, index| %>
-        <p>
-            
-            Course: <%= course.code %> <br/>
-            <%= link_to "Name: #{course.name} ", "/courses/#{course.id}" %>
-        </p>
+<h2><%= @user.name %></h2>
+<% @user.courses.each.with_index do |course, index| %>
+    <%= link_to "/courses/#{course.id}", :action => 'go' do %>
+        <div class="course">
+            <p>
+                Course: <%= course.code %> <br/>
+                Name: <%= course.name %> <br/>
+            </p>
+        </div>
     <% end %>
-
-<% else %>
-    <h2>Instructor</h2>
-    <% @user.courses.each.with_index do |course, index| %>
-        <p>
-            
-            Course: <%= course.code %> <br/>
-            <%= link_to "Name: #{course.name} ", "/courses/#{course.id}" %>
-        </p>
-    <% end %>
+    
 <% end %>
+
+<% if @user.is_student == false %>
+    <%= link_to "/courses/new", :action => 'go' do %>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Create Course</button>
+    <% end %>
+    
+    <% end %>
 
