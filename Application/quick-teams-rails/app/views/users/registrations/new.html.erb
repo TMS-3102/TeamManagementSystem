@@ -13,7 +13,7 @@
             <li><%= f.text_field :name, autocomplete: "name", placeholder:"Name", autofocus: true, class: "form-control" %></li>
             <li><%= f.text_field :identification_number, autofocus: true, autocomplete: "########", placeholder:"#######", class: "form-control" %></li>            
              
-            <li><%= f.select :is_student, options_for_select([["Student", 1], ["Instructor", 0]], 1), class: "form-control" %></li>
+            <li><%= f.select(:is_student, options_for_select([["Student", 1], ["Instructor", 0]], 1), {}, {:class => "form-control"}) %></li>
             <li><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %></li>
             <li><%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "form-control" %></li>
             <li><%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: "form-control" %></li>

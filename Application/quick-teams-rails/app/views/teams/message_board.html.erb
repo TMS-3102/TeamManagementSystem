@@ -1,7 +1,9 @@
 <h1 style="text-align: center; padding-top: 5%"><%=@team.name%> Message Board</h1>
 
-<% if @message_board.messages.length == 0 %>
-    This message board has no messages yet. Create a new one below.
+<% if @message_board.messages.empty? %>
+    <div style="text-align: center">
+        This message board has no messages yet. Create a new one below.
+    </div>
 <% end %>
 
 <div class="row">
