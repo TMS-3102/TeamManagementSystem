@@ -1,40 +1,39 @@
-
-<style>
-	#select {
-		width: 40%;
-	}
-</style>
-
-<div class='div-center'>
-<% if @team.errors.full_messages.present? %>
-	<ul>
-		<% @team.errors.full_messages.each do |error| %>
-			<li>
-				<%= error %>
-			</li>
+<div class='row'>
+    <div class='col'>
+    </div>
+	<div class='col-5'>
+		<% if @team.errors.full_messages.present? %>
+			<ul>
+				<% @team.errors.full_messages.each do |error| %>
+					<li>
+						<%= error %>
+					</li>
+				<% end %>
+			</ul>
 		<% end %>
-	</ul>
-<% end %>
 
-<%= form_for(@team) do |f| %>
-<h3 class="course-card-title" >Create Team</h3>
-<ul id="create-course">
-	<li class="input-title"><%= f.label(:name) %></li>
-	  <li class="input"><%= f.text_field :name, autocomplete: "Team name", placeholder:"Team Name", autofocus: true, class: "form-control" %></li>
-	<li class="input-title"><%= f.label(:liaison_id) %></li>
-		<li id="select"><%= f.collection_select(:liaison_id, User.all, :id, :name, {:prompt => true},{ class:"form-control"}) %> </li>
-	<li class="input-title"><%= f.label(:maximum_capacity) %> </li>
-		<li class="input"><%= f.number_field :maximum_capacity, placeholder:"Max Team Capacity", class: "form-control" %></li>
-	<li class="input-title"><%= f.label(:minimum_capacity) %></li>
-		<li class="input"><%= f.number_field :minimum_capacity, placeholder:"Min Team Capacity", class: "form-control" %></li>
-	<li class="input-title"><%= f.label(:deadline) %></li>
-    <li class="input"> <%= f.date_field :deadline, as: :date, value: f.object.try(:strftime,"%m/%d/%Y"), class:'form-control' %></li>
-  <li class="input-title"><%= f.label(:course_id) %> </li>
-			<li id="select"><%= f.collection_select(:course_id, Course.all, :id, :name, {:prompt => true},{ class:"form-control"}) %></li>
+		<%= form_for(@team) do |f| %>
+		<h1>Create Team</h1>
+		<ul id="create-course">
+			<li class="input-title"><%= f.label(:name) %></li>
+			<li class="input"><%= f.text_field :name, autocomplete: "Team name", placeholder:"Team Name", autofocus: true, class: "form-control" %></li>
+			<li class="input-title"><%= f.label(:liaison_id) %></li>
+				<li id="select"><%= f.collection_select(:liaison_id, User.where(is_student: true), :id, :name, {:prompt => true},{ class:"form-control"}) %> </li>
+			<li class="input-title"><%= f.label(:maximum_capacity) %> </li>
+				<li class="input"><%= f.number_field :maximum_capacity, placeholder:"Max Team Capacity", class: "form-control" %></li>
+			<li class="input-title"><%= f.label(:minimum_capacity) %></li>
+				<li class="input"><%= f.number_field :minimum_capacity, placeholder:"Min Team Capacity", class: "form-control" %></li>
+			<li class="input-title"><%= f.label(:deadline) %></li>
+			<li class="input"> <%= f.date_field :deadline, as: :date, value: f.object.try(:strftime,"%m/%d/%Y"), class:'form-control' %></li>
+		<li class="input-title"><%= f.label(:course_id) %> </li>
+					<li id="select"><%= f.collection_select(:course_id, Course.all, :id, :name, {:prompt => true},{ class:"form-control"}) %></li>
 
-  <li class="input-title"> <%= f.label :number_stored, "Number of Messages Stored" %> </li>
-		<li class="input"><%= text_field_tag(:number_stored, nil, class: "form-control",placeholder: "Number of Messages Stored on Message Board") %> </li>
-	<li class="submit-btn"><%= f.submit class: "btn btn-danger"%></li>
+		<li class="input-title"> <%= f.label :number_stored, "Number of Messages Stored" %> </li>
+				<li class="input"><%= text_field_tag(:number_stored, nil, class: "form-control",placeholder: "Number of Messages Stored on Message Board") %> </li>
+			<li class="submit-btn"><%= f.submit class: "btn btn-danger"%></li>
 
-<% end %>
+		<% end %>
+	</div>
+	<div class='col'>
+	</div>
 </div>

@@ -83,7 +83,13 @@ class TeamsController < ApplicationController
             course = Course.find(params[:team][:course_id])
             course.teams << @team
         end
-        
+
+        liaison = User.find_by(id: params[:team][:liaison_id].to_i)
+        liaison.is_liaison = true
+        liaison.save
+
+        @team.users << liaison
+
         if @team.save
             flash[:success] = "New team created."
             redirect_to "/accounts/#{current_user.id}"
