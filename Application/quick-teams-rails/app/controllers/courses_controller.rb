@@ -51,6 +51,8 @@ class CoursesController < ApplicationController
         @course = Course.new(course_params)
         @course.instructor_id = current_user.id
 
+        current_user.courses << @course
+
         if @course.save
             flash[:success] = "New course created."
             redirect_to "/accounts/#{current_user.id}"

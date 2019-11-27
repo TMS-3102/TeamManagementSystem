@@ -5,7 +5,7 @@
 		<% if @team.errors.full_messages.present? %>
 			<ul>
 				<% @team.errors.full_messages.each do |error| %>
-					<li>
+					<li style="color: red;">
 						<%= error %>
 					</li>
 				<% end %>

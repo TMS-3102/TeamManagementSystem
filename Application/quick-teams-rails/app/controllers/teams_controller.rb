@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-
     def index
         @teams = Team.all
     end
@@ -57,7 +56,7 @@ class TeamsController < ApplicationController
                 flash[:success] = "Request successfully approved."
             end
         else
-            flash[:danger] = "Request successfully rejected."
+            flash[:success] = "Request successfully rejected."
         end
         request.destroy
         redirect_to "/teams/#{params[:id]}/student_requests"
@@ -65,11 +64,6 @@ class TeamsController < ApplicationController
     
     def new
         @team = Team.new
-
-        if current_user.is_student?
-            flash[:warning] = "Your user account type is not authorized to create new teams."
-            redirect_to "/accounts/#{current_user.id}"
-        end
     end
 
     def create
@@ -81,14 +75,25 @@ class TeamsController < ApplicationController
 
         if params[:team][:course_id].present?
             course = Course.find(params[:team][:course_id])
+
+            course.teams.each do |team|
+                team.users.each do |user|
+                    if user.id == current_user.id
+                        flash[:danger] = "New team creation failed. User is already a member of #{team.name}"
+                        redirect_to "/accounts/#{current_user.id}" and return
+                    end
+                end
+            end
+
+
             course.teams << @team
         end
-
         liaison = User.find_by(id: params[:team][:liaison_id].to_i)
-        liaison.is_liaison = true
-        liaison.save
-
-        @team.users << liaison
+        if liaison.present?    
+            liaison.is_liaison = true
+            liaison.save
+            @team.users << liaison
+        end
 
         if @team.save
             flash[:success] = "New team created."

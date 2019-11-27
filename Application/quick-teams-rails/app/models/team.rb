@@ -3,4 +3,7 @@ class Team < ApplicationRecord
     has_one :message_board
     has_many :requests
     has_and_belongs_to_many :users
+
+    validates :name, :liaison_id, :maximum_capacity, :minimum_capacity, :deadline, :course_id, presence: true
+    validates :name, uniqueness: true
 end
