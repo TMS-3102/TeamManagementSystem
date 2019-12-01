@@ -16,14 +16,14 @@
                         <%= form_for course, :url => add_student_path(course.id) do |f| %>
                             <%= f.label(:add_student) %>
                             <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: true), 'id', 'name') %>
-                            <%= f.submit "Update Student", class: "btn btn-danger", style: "background-color: green; border-color: green;" %><br>
+                            <%= f.submit "Update Student", class: "btn btn-success" %><br>
                         <% end %>
                     </div>
                     <div class="course-update">
                         <%= form_for course, :url => add_student_path(course.id) do |f| %>
                             <%= f.label(:add_instructor) %>
                             <%= select_tag :student_id, options_from_collection_for_select(User.where(is_student: false), 'id', 'name') %>
-                            <%= f.submit "Update Instructor", class: "btn btn-danger", style: "background-color: green; border-color: green;" %>
+                            <%= f.submit "Update Instructor", class: "btn btn-success" %>
                         <% end %>
                     </div>
                 </p>
