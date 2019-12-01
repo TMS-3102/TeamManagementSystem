@@ -1,24 +1,30 @@
-<% if @course.errors.full_messages.present? %>
-	<ul>
-		<% @course.errors.full_messages.each do |error| %>
-			<li>
-				<%= error %>
-			</li>
+<div class='row'>
+    <div class='col'>
+    </div>
+	<div class='col-5'>
+		<% if @course.errors.full_messages.present? %>
+			<ul>
+				<% @course.errors.full_messages.each do |error| %>
+					<li>
+						<%= error %>
+					</li>
+				<% end %>
+			</ul>
+		<% end %> 
+
+		<%= form_for(@course) do |f| %>
+			<h1>Create Course</h1>
+			<ul id="create-course"> 
+				<li class="input-title"><%= f.label(:name) %></li>
+				<li class="input"><%= f.text_field :name, autocomplete: "course name", placeholder:"Course Name", autofocus: true, class: "form-control" %></li>
+				<li class="input-title"><%= f.label(:code) %></li>
+				<li class="input"><%= f.text_field :code, autocomplete: "course code", placeholder:"Course Code", autofocus: true, class: "form-control" %></li>
+				<li class="submit-btn"><%= f.submit "Create", class: "btn btn-danger" %></li>   
+			</ul>
+
 		<% end %>
-	</ul>
-<% end %> 
 
-<%= form_for(@course) do |f| %>
-
-
-	<h4 class="course-card-title" >Create Course</h4>
-    <ul id="create-course"> 
-		<li class="input-title"><%= f.label(:name) %></li>
-        <li class="input"><%= f.text_field :name, autocomplete: "course name", placeholder:"Course Name", autofocus: true, class: "form-control" %></li>
-        <li class="input-title"><%= f.label(:code) %></li>
-		<li class="input"><%= f.text_field :code, autocomplete: "course code", placeholder:"Course Code", autofocus: true, class: "form-control" %></li>
-        <li class="submit-btn"><%= f.submit "Create", class: "btn btn-success" %></li>   
-
-    </ul>
-
-<% end %>
+	</div>
+	<div class='col'>
+	</div>
+</div>

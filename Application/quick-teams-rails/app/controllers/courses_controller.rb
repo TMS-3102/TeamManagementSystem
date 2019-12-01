@@ -27,6 +27,15 @@ class CoursesController < ApplicationController
     def show 
         @course = Course.find params[:id]
         @request = Request.new
+
+        @student_on_team = false
+        @course.teams do |team|
+            team.users do |member|
+                if member.id == current_user.id
+                    @student_on_team = true
+                end
+            end
+        end
     end
 
     def new
@@ -34,13 +43,15 @@ class CoursesController < ApplicationController
 
         if current_user.is_student?
             flash[:warning] = "Your user account type is not authorized to create new courses."
-            redirect_to "/accounts/#{current_user.id}"
+            redirect_to "/courses/"
         end
     end
 
     def create
         @course = Course.new(course_params)
         @course.instructor_id = current_user.id
+
+        current_user.courses << @course
 
         if @course.save
             flash[:success] = "New course created."

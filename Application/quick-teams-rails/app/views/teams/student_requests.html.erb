@@ -1,19 +1,35 @@
 
-<h1>Requests</h1>
+<h1 style="text-align: center;"> <%= @team.name %> Requests</h1>
 
 <% if @requests.length == 0 %>
-    No requests available.
-<% end %>
+    <div style="text-align: center;">
+      No requests available.
+    </div>
+<% else %>
 
-<% @requests.each_with_index do |request, index| %>
-    <% student = User.find(request.student_id) %>
-    <p>
-        Index: <%= index %> <br/>
-        Name: <%= student.name %> <br/>
-        Email: <%= student.email %> <br/>
-        Student Id: <%= student.identification_number %> <br/>
-        Request Id: <%= request.id %>
-        <%= button_to 'Approve Request', approve_or_reject_join_team_path(params[:id], student_id: student.id, status: true, request_id: request.id)%>
-        <%= button_to 'Reject Request', approve_or_reject_join_team_path(params[:id], student_id: student.id, status: false, request_id: request.id)%>
-    </p>
+  <table class="table" style="margin-top: 2.55%; text-align: center">
+    <thead class="thead-dark">
+      <tr>
+        <th>Request ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Student ID</th>
+        <th>Accept</th>
+        <th>Reject</th>   
+      </tr>
+    </thead>
+    <tbody>
+      <% @requests.each_with_index do |request, index| %>
+          <% student = User.find(request.student_id) %>
+          <tr>
+              <td><%= request.id %></td>
+              <td><%= student.name %></td>
+              <td><%= student.email %></td>
+              <td><%= student.identification_number %></td>
+              <td><%= button_to 'Approve Request', approve_or_reject_join_team_path(params[:id], student_id: student.id, status: true, request_id: request.id), {class:"btn btn-success"}%></td>
+              <td><%= button_to 'Reject Request', approve_or_reject_join_team_path(params[:id], student_id: student.id, status: false, request_id: request.id), {class:"btn btn-danger"}%></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

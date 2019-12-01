@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-
     def index
         @teams = Team.all
     end
@@ -17,7 +16,8 @@ class TeamsController < ApplicationController
         @message.title = params[:message][:title]
         @message.content = params[:message][:content]
         @message.priority = params[:message][:priority]
-
+        @message.name = current_user.name
+        @message.post_date = DateTime.now
         team = Team.find(params[:id])
         team.message_board.messages << @message 
 
@@ -30,10 +30,10 @@ class TeamsController < ApplicationController
     end
 
     def student_requests
-        team = Team.find params[:id]
-        @requests = team.requests
+        @team = Team.find params[:id]
+        @requests = @team.requests
 
-        if(current_user.id != team.liaison_id && current_user.is_student)
+        if(current_user.id != @team.liaison_id && current_user.is_student)
             flash[:danger] = "Your account is not authorized to visit that page."
             redirect_to "/accounts/#{current_user.id}"
         end
@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
                 flash[:success] = "Request successfully approved."
             end
         else
-            flash[:danger] = "Request successfully rejected."
+            flash[:success] = "Request successfully rejected."
         end
         request.destroy
         redirect_to "/teams/#{params[:id]}/student_requests"
@@ -64,11 +64,6 @@ class TeamsController < ApplicationController
     
     def new
         @team = Team.new
-
-        if current_user.is_student?
-            flash[:warning] = "Your user account type is not authorized to create new teams."
-            redirect_to "/accounts/#{current_user.id}"
-        end
     end
 
     def create
@@ -80,9 +75,26 @@ class TeamsController < ApplicationController
 
         if params[:team][:course_id].present?
             course = Course.find(params[:team][:course_id])
+
+            course.teams.each do |team|
+                team.users.each do |user|
+                    if user.id == current_user.id
+                        flash[:danger] = "New team creation failed. User is already a member of #{team.name}"
+                        redirect_to "/accounts/#{current_user.id}" and return
+                    end
+                end
+            end
+
+
             course.teams << @team
         end
-        
+        liaison = User.find_by(id: params[:team][:liaison_id].to_i)
+        if liaison.present?    
+            liaison.is_liaison = true
+            liaison.save
+            @team.users << liaison
+        end
+
         if @team.save
             flash[:success] = "New team created."
             redirect_to "/accounts/#{current_user.id}"

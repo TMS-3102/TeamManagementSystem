@@ -1,16 +1,87 @@
-<h1>
-    Course page that will list teams. 
+<head>
+  <style>
+  #teams {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+
+  #teams td, #teams th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #teams tr:nth-child(even){background-color: #f2f2f2;}
+
+  #teams tr:hover {background-color: #ddd;}
+
+  #teams th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .center {
+    text-align: center;
+  }
+  </style>
+</head>
+<h1 class="center">
+    <%= @course.name %>: Active Teams
 </h1>
 
-<p>
-    Access all teams with @course.teams
-</p>
-
-test
-<% @course.teams.each do |team| %>
-    <p>
-        <%= team.name %>
-        Number of requests: <%= team.requests.length%>
-        <%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id) %>
-    </p>
-<% end %>
+<table id = "teams">
+  <th>Team Name</th>
+  <th>Active Members</th>
+  <th>Team Capacity</th>
+  <th>Liaison</th>
+  <th>Requests</th>
+  <th>Active Requests</th>
+  <% if !current_user.is_student %>
+    <th>Message Board</th>
+  <% end %>
+  <% @course.teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.users.count %></td>
+        <td><%= team.maximum_capacity %></td>
+        <td>
+          <% liaison = User.where(id: team.liaison_id) if team.liaison_id.present? %>
+          <% if liaison.present? %>
+            <%= liaison[0].name %>
+          <% end %>
+        </td>
+        <td class='center'>
+          Number of requests: <%= team.requests.length%><br>
+          <% if !current_user.is_student %>
+            
+          <% elsif @student_on_team %>
+            Already on a team.
+          <% elsif !team.requests.where(student_id: current_user.id).empty? %>
+            Request Active
+          <% elsif team.requests.length == team.maximum_capacity %>
+            <%= button_to 'Team Full', request_join_team_path(params[:id], team_id: team.id), {class: "btn btn-outline-secondary", style: "pointer-events: none !important;"} %>
+          <%else%>
+            <%= button_to 'Request to Join', request_join_team_path(params[:id], team_id: team.id), {class: "btn btn-outline-success"} %>
+          <% end %>
+        </td>
+        <td class='center'>
+          <% if current_user.id == team.liaison_id || !current_user.is_student%>
+            <%= link_to "Requests", "/teams/#{team.id}/student_requests", class: "btn btn-secondary" %>
+          <% else %>
+            N/A <%= team.liaison_id %>
+          <% end %>
+        </td>
+        <% if !current_user.is_student %>
+          <td class='center'>
+              <%= link_to "Message Board", "/teams/#{team.id}/message_board", class: "btn btn-secondary" %>
+          </td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+<br>
+<%= link_to "Create Team", "/teams/new", :class=>"btn btn-danger right" %>

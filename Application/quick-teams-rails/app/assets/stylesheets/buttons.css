@@ -77,3 +77,8 @@
 .hidden-submit{
     display: none !important;
 }
+
+.right {
+    float: right;
+    color: white !important;
+}
