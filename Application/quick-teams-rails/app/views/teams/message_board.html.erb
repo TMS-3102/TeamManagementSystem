@@ -1,4 +1,11 @@
-<h1 style="text-align: center;"><%=@team.name%> Message Board</h1>
+<h1 style="text-align: center;">
+    <%=@team.name%> Message Board
+</h1>
+<div style="width: 100%;">
+<% if current_user.id == @team.liaison_id || !current_user.is_student%>
+    <%= link_to "Requests", "/teams/#{@team.id}/student_requests", class: "btn btn-danger white" %>
+<% end %>
+</div>
 
 <% if @message_board.messages.empty? %>
     <div style="text-align: center">

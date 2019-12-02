@@ -72,7 +72,7 @@
           <% if current_user.id == team.liaison_id || !current_user.is_student%>
             <%= link_to "Requests", "/teams/#{team.id}/student_requests", class: "btn btn-secondary" %>
           <% else %>
-            N/A <%= team.liaison_id %>
+            N/A
           <% end %>
         </td>
         <% if !current_user.is_student %>

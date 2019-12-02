@@ -11,9 +11,8 @@
 				<% end %>
 			</ul>
 		<% end %> 
-
+		<h1>Create Course</h1>
 		<%= form_for(@course) do |f| %>
-			<h1>Create Course</h1>
 			<ul id="create-course"> 
 				<li class="input-title"><%= f.label(:name) %></li>
 				<li class="input"><%= f.text_field :name, autocomplete: "course name", placeholder:"Course Name", autofocus: true, class: "form-control" %></li>
@@ -21,7 +20,6 @@
 				<li class="input"><%= f.text_field :code, autocomplete: "course code", placeholder:"Course Code", autofocus: true, class: "form-control" %></li>
 				<li class="submit-btn"><%= f.submit "Create", class: "btn btn-danger" %></li>   
 			</ul>
-
 		<% end %>
 
 	</div>

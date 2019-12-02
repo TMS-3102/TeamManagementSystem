@@ -6,7 +6,6 @@
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <h4 class="card-title" style="color: #FF250D;">Login</h4>
-        <!--<h4 class="card-title" style="color: #FF250D;">Login</h4>-->
         <ul> 
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %><br>
 
