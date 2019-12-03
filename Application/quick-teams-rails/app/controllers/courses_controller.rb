@@ -14,12 +14,15 @@ class CoursesController < ApplicationController
         user = User.find(params[:student_id])
         course = Course.find(params[:id])
 
-
         if course.users.where(id: user.id).empty?
             course.users << user
             flash[:success] = "#{user.name} has been registered to #{course.code}"
         else
-            flash[:danger] = "This student is already registered to #{course.code}"
+            if user.is_student
+                flash[:danger] = "This student is already registered to #{course.code}"
+            else
+                flash[:danger] = "This instructor is already registered to #{course.code}"
+            end
         end    
         redirect_to '/courses'
     end
