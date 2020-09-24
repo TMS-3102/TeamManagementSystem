@@ -1,24 +1,22 @@
-# README
+# Team Management System (TMS)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
+---
+TMS is a web application used by class instructors and students to manage in class teams. The main functionalities for instructors are to create classes, create teams, assign liasons to the teams, and view all teams. The main functionalities for students are to join a team, post messages for all team members to see, and view the teams they are members of.
 
-Things you may want to cover:
+## Team Members
+---
+| Name | Student Number |
+|----|----|
+| Atinderpaul Kanwar | 8732400 |
+| Christopher Francis | 8661478 |
+| Jaimin Patel | 8721083 |
+| Samuel Worrod | 8653389 |
 
-* Ruby version
+## Other Tools Used
+---
+ - [Basecamp](https://3.basecamp.com/4865769/projects/18929395)
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Notes
+This project was originally started in SEG3102. It is being used for the project in SEG4105.
