@@ -46,9 +46,7 @@ jobs:
 #           sudo rails db:setup
         
       - name: Setup Test Database
-        run: |
-            sudo rails -v
-            sudo bin/rails db:migrate RAILS_ENV=test
+        run: bundle exec rails db:setup
 
       - name: Run tests
         run: bundle exec rake
