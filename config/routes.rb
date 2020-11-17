@@ -21,4 +21,10 @@ Rails.application.routes.draw do
   get '/teams/:id/student_requests' => 'teams#student_requests'
   post "/teams/:id/approve_or_reject_join_team" => "teams#approve_or_reject_join_team", :as => :approve_or_reject_join_team
 
+  get "/teams/:team_id/tasks" => "tasks#index"
+  #get "/teams/:team_id/tasks/:id" => 'tasks#show'
+  post '/teams/:team_id/tasks/' => 'tasks#create'
+  delete '/teams/:team_id/tasks/:id' => 'tasks#destroy'
+  patch '/teams/:team_id/tasks/:id' => 'tasks#update'
+
 end
