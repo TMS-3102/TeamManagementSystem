@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191124201104) do
+ActiveRecord::Schema.define(version: 20201117224309) do
 
   create_table "courses", force: :cascade do |t|
     t.datetime "created_at",    null: false
@@ -50,6 +50,25 @@ ActiveRecord::Schema.define(version: 20191124201104) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "team_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "description"
+    t.boolean  "completed",   default: false
+    t.string   "title"
+    t.date     "deadline"
+    t.integer  "order"
+    t.integer  "priority"
+    t.integer  "team_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "tasks_users", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade do |t|
