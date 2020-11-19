@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   get '/teams/:id/student_requests' => 'teams#student_requests'
   post "/teams/:id/approve_or_reject_join_team" => "teams#approve_or_reject_join_team", :as => :approve_or_reject_join_team
 
+  post "/teams/:id/message_board/bulk_update" => "teams#bulk_update"
 end

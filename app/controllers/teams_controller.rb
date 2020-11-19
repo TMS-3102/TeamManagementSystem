@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def index
         @teams = Team.all
     end
@@ -8,6 +10,11 @@ class TeamsController < ApplicationController
         @message_board = @team.message_board
 
         @message = Message.new
+    
+        respond_to do |format|
+            format.html
+            format.json
+        end
     end
 
     def create_message
@@ -112,6 +119,19 @@ class TeamsController < ApplicationController
 
     # def destroy
     # end
+
+    def bulk_update
+        @team = Team.find params[:id]
+
+        
+
+
+        @message_board = @team.message_board
+
+        respond_to do |format|
+            format.json 
+        end
+    end
 
     private
     def team_params

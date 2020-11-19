@@ -1,6 +1,15 @@
+<%= javascript_pack_tag 'tasks' %>
+
 <h1 style="text-align: center;">
     <%=@team.name%> Message Board
 </h1>
+
+<%= content_tag :div,
+  id: "tasks-mount-point",
+  data: @message_board.messages.to_json do %>
+<% end %>
+
+
 <div style="width: 100%;">
 <% if current_user.id == @team.liaison_id || !current_user.is_student%>
     <%= link_to "Requests", "/teams/#{@team.id}/student_requests", class: "btn btn-danger white" %>
