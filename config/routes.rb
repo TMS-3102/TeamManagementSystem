@@ -26,5 +26,7 @@ Rails.application.routes.draw do
   post '/teams/:team_id/tasks/' => 'tasks#create'
   delete '/teams/:team_id/tasks/:id' => 'tasks#destroy'
   patch '/teams/:team_id/tasks/:id' => 'tasks#update'
+  
+  post "/teams/:team_id/tasks/bulk_update" => "tasks#bulk_update"
 
 end

@@ -1,3 +1,23 @@
 // Place all the styles related to the Task controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#tasks-container {
+    display: flex;
+    justify-content: center;
+
+    .tasks {
+        
+        .task-content {
+            margin: 10px;
+
+            .card-title {
+                text-align: center;
+                background-color: rgb(247, 155, 155);
+            }
+
+            .card-body {
+                padding: 0 1.25rem;
+            }
+        }
+    }
+}
