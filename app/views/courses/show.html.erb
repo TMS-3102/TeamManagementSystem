@@ -43,6 +43,7 @@
   <% if !current_user.is_student %>
     <th>Message Board</th>
   <% end %>
+  <th>Task List</th>
   <% @course.teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
@@ -80,6 +81,9 @@
               <%= link_to "Message Board", "/teams/#{team.id}/message_board", class: "btn btn-secondary" %>
           </td>
         <% end %>
+        <td class='center'>
+          <%= link_to "Task List", "/teams/#{team.id}/tasks", class: "btn btn-secondary" %>
+        </td>
       </tr>
   <% end %>
 </table>
