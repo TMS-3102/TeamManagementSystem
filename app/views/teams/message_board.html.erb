@@ -31,20 +31,22 @@
         </div>
     </div>
     <div id="right" class="col-sm-6">
-        <% @message_board.messages.last(@message_board.number_stored).each_with_index do |message, index| %>
-            <div class="card">
-                <div class="card-body">
-                    <h3><%= message.title %></h3>
-                        <h5>
-                            Priority: <%= message.priority %>
-                        </h5>    
-                        <p>
-                            <%= message.content %> <br/><br/>
-                            Post Date: <%= message.post_date %> <br/>
-                            Created By: <%= message.name %>
-                        </p>
+        <% if !@message_board.messages.empty? %>
+            <% @message_board.messages.last(@message_board.number_stored).each_with_index do |message, index| %>
+                <div class="card">
+                    <div class="card-body">
+                        <h3><%= message.title %></h3>
+                            <h5>
+                                Priority: <%= message.priority %>
+                            </h5>    
+                            <p>
+                                <%= message.content %> <br/><br/>
+                                Post Date: <%= message.post_date %> <br/>
+                                Created By: <%= message.name %>
+                            </p>
+                    </div>
                 </div>
-            </div>
+            <% end %>
         <% end %>
     </div>
     <div class="col-sm">
