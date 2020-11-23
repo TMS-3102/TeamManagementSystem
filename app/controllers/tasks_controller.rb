@@ -4,6 +4,7 @@ class TasksController < ApplicationController
     def index
         @team = Team.find params[:team_id]
         @tasks = @team.tasks
+        @task = Task.new
 
         respond_to do |format|
             format.html
@@ -12,7 +13,7 @@ class TasksController < ApplicationController
     end
 
     def update
-        @task = params[:id]
+        @task = Task.find params[:id]
         @task.update(task_params)
         redirect_to "/teams/#{params[:team_id]}/tasks"
     end
@@ -25,10 +26,14 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        @task = params[:id]
+        @task = Task.find params[:id]
         @task.destroy(task_params)
         redirect_to "/teams/#{params[:team_id]}/tasks"
     end
+
+    def edit
+        @task = Task.find params[:id]
+    end 
 
     def bulk_update
         @team = Team.find params[:team_id]

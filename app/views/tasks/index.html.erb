@@ -8,3 +8,53 @@
   id: "tasks-mount-point",
   data: @tasks.to_json do %>
 <% end %>
+
+<div class="row">
+    <div id="left" class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Create New Task</h3>
+                <%= form_for @task, :url => "/teams/#{params[:team_id]}/tasks" do |f| %>
+                    <%= f.text_field(:title, placeholder:"Title", class:"form-control") %> <br>
+                    
+                    <%= f.text_area(:description, placeholder:"Description", class:"form-control") %> <br>
+
+                    <%= label_tag "Deadline: " %>
+                    <%= f.date_select(:deadline, include_blank: true, selected: Date.today,) %> <br><br>
+
+                    <%= label_tag "Priority: " %>
+                    <%= f.select :priority, options_for_select([["1"], "2", "3", "4", "5"]), :class => 'genForm_dropBox' %> <br><br>
+                    
+                    <%= f.submit "Create Task", class: "btn btn-danger"  %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div id="right" class="col-sm-8">
+        <% if @tasks.empty? %>
+            <div style="text-align: center">
+                There are no assigned tasks yet. Create a new one to the left.
+            </div>
+        <% end %>
+        <% if !@tasks.empty? %>
+            <% @tasks.last(@tasks.length).each_with_index do |task, index| %>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="float: left"><%= task.title %></h3>
+                        <h3 style="text-align: right">Due: <%= task.deadline.strftime("%B %d, %Y") %></h3>
+                        <h5 style="text-align: right">Priority: <%= task.priority %></h5>
+                        
+                        <%= task.description %> <br/><br/>
+                        <b>Post Date:</b> <%= task.created_at.strftime("%B %d, %Y, %l:%M %p") %>
+                        <div style="float:right">
+                            <div style="float: left">
+                                <%= link_to "Modify", "/teams/#{params[:team_id]}/tasks/#{task.id}/edit" %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+
+</div>
