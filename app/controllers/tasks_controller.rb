@@ -13,7 +13,6 @@ class TasksController < ApplicationController
     end
 
     def update
-        binding.pry
         @task = Task.find params[:id]
         @task.update(task_params)
         redirect_to "/teams/#{params[:team_id]}/tasks"
