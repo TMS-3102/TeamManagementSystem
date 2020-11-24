@@ -48,6 +48,43 @@ class Tasks extends React.Component {
     return arr;
   }
 
+  destroyTask = (e, taskId) => {
+    e.preventDefault();
+    
+    fetch('tasks/' + taskId, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => this.getTasks());
+  }
+  
+  completeTask = (e, task, completeStatus) => {
+    e.preventDefault();
+    
+    task["completed"] = completeStatus;
+    const data = { task }
+    
+    fetch('tasks/' + task.id + '/set_complete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(this.getTasks());
+  }
+
+  removeUser = (e, taskId, userId) => {
+    e.preventDefault();
+    
+    fetch('tasks/' + taskId + '/remove_user/' + userId, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => this.getTasks());
+  }
+
   render() {
     const { tasks } = this.state;
 
@@ -62,14 +99,49 @@ class Tasks extends React.Component {
                     <Draggable key={task.task.id} draggableId={''+task.task.id} index={index}>
                       {(provided) => (
                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                          <div className='card task-content'>
-                            <div className='card-title'>
-                              <b>{task.task.title}</b>
+                          <div className={task.task.completed ? 'card task-content done' : 'card task-content'}>
+                            <div className={task.task.completed ? 'card-title done' : 'card-title'}>
+                              <h3 className='left'>{task.task.title}</h3>
+                              <h3 className='right'>Due: { task.task.deadline }</h3>
                             </div>
-                            <div className='card-body'>
-                              Description: {task.task.description} <br/>
-                              Order: {task.task.order} <br/>
-                              Priority: {task.task.priority} <br/>
+                            <div className="card-body">
+                              <h5 className='priority'>Priority: { task.task.priority }</h5>
+                              { task.task.description } <br/><br/>
+                              
+                              <div>
+                                Assigned To:
+                                { task.task.users.length === 0 &&
+                                  <p>No One</p>
+                                }
+                                
+                                { task.task.users.map((user) => {
+                                    return (
+                                      <div class='user'>
+                                        <p>{user.name}</p>
+                                        <a onClick={(e) => {this.removeUser(e, task.task.id, user.id)}}>Remove</a>
+                                      </div>
+                                    )
+                                  }) 
+                                }
+                              </div>
+
+                              <b>Post Date:</b> { new Date(task.task.created_at).toLocaleString() }
+                              <div className='buttons'>
+                                <div className='button modify-button'>
+                                  <a href={"/teams/" + task.task.team_id + "/tasks/" + task.task.id + "/edit"}> Modify </a>
+                                </div>
+                                <div className='button destroy-button'>
+                                  <a onClick={(e) => {this.destroyTask(e, task.task.id)}}> Delete </a>
+                                </div>
+                                <div className='button done-button'>
+                                  { task.task.completed ?
+                                    <a onClick={(e) => {this.completeTask(e, task.task, false)}}> Reactivate</a>
+                                  :
+                                    <a onClick={(e) => {this.completeTask(e, task.task, true)}}> Complete </a>
+
+                                  }
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </li>

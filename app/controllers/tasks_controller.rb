@@ -15,6 +15,10 @@ class TasksController < ApplicationController
     def update
         @task = Task.find params[:id]
         @task.update(task_params)
+        if params[:user_id]
+            user = User.find params[:user_id]
+            @task.users << user
+        end
         redirect_to "/teams/#{params[:team_id]}/tasks"
     end
 
@@ -27,12 +31,15 @@ class TasksController < ApplicationController
 
     def destroy
         @task = Task.find params[:id]
-        @task.destroy(task_params)
-        redirect_to "/teams/#{params[:team_id]}/tasks"
+        @task.destroy
+        respond_to do |format|
+            format.json
+        end
     end
 
     def edit
         @task = Task.find params[:id]
+        @team = Team.find params[:team_id]
     end 
 
     def bulk_update
@@ -45,6 +52,26 @@ class TasksController < ApplicationController
 
         @tasks = @team.tasks
 
+        respond_to do |format|
+            format.json 
+        end
+    end
+
+    def remove_user
+        @task = Task.find params[:id]
+        @task.users.delete(User.find params[:user_id])
+        respond_to do |format|
+            format.json 
+        end
+    end
+
+    def set_complete
+        @task = Task.find params[:id]
+        @task.update(task_params)
+
+        @team = Team.find params[:team_id]
+        @tasks = @team.tasks
+        
         respond_to do |format|
             format.json 
         end

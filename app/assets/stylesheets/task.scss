@@ -2,22 +2,81 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #tasks-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    .tasks {
-        
-        .task-content {
-            margin: 10px;
+  .tasks {
+    width: 100%;
+    .task-content {
+      margin: 10px;
+      border-radius: 0 0 20px 20px;
 
-            .card-title {
-                text-align: center;
-                background-color: rgb(247, 155, 155);
-            }
+      &.done {
+        text-decoration: line-through;
+      }
 
-            .card-body {
-                padding: 0 1.25rem;
-            }
+      .card-title {
+        background-color: rgb(247, 155, 155);
+        &.done {
+          background-color: rgb(172, 172, 172);
         }
+        h3 {
+          padding: 5px 10px;
+          &.left {
+            float: left;
+          }
+
+          &.right {
+            text-align: right;
+          }
+        }
+      }
+
+      .card-body {
+        padding: 0 1.25rem;
+
+        .priority {
+          text-align: right;
+        }
+
+        .user {
+          display: flex;
+          a {
+            height: fit-content;
+            margin-left: 5px;
+            padding: 0 5px;
+            border-radius: .25rem;
+            background-color: lightpink;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .buttons {
+          display: flex;
+          float: right;
+
+          .button {
+            margin: 5px;
+            padding: 5px 10px;
+            border-radius: .25rem;
+            &:hover {
+              cursor: pointer;
+            }
+
+            &.modify-button {
+              background-color: lightgray;
+            }
+            &.destroy-button {
+              background-color: lightpink;
+            }
+            &.done-button {
+              background-color: lightgreen;
+            }
+          }
+        }
+      }
     }
+  }
 }
