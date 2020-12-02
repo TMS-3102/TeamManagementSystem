@@ -11,6 +11,7 @@
 
             <%= label_tag "Priority: " %>
             <%= f.select :priority, options_for_select([["1"], "2", "3", "4", "5"]), :class => 'genForm_dropBox' %> <br><br>
+            <%= select_tag :user_id, options_from_collection_for_select(@team.users, 'id', 'name') %> <br><br>
             
             <%= f.submit "Modify Task", class: "btn btn-danger"  %>
         <% end %>

@@ -29,5 +29,7 @@ Rails.application.routes.draw do
   patch '/teams/:team_id/tasks/:id' => 'tasks#update'
   
   post "/teams/:team_id/tasks/bulk_update" => "tasks#bulk_update"
+  post "/teams/:team_id/tasks/:id/remove_user/:user_id" => "tasks#remove_user"
+  post "/teams/:team_id/tasks/:id/set_complete" => "tasks#set_complete"
 
 end
